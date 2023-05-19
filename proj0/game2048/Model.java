@@ -169,13 +169,47 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
+
+        /* 1. There is at least one empty space on the board*/
+        if(emptySpaceExists(b)) return true;
+
+        /* 2. There are at least two adjacent tiles with the same value*/
+        int s = b.size();
+        for(int row = 0; row < s; row ++) {
+            for (int col = 0; col < s; col ++) {
+                // get the current value of tile
+                Tile curT = b.tile(row, col);
+                if(curT == null) continue;
+                int cur = curT.value();
+
+                // check right adjacent value
+                if(col < s - 1 && cur == b.tile(row, col + 1).value()) {
+                    return true;
+                }
+
+                // check bottom adjacent value
+                if(row < s - 1 && cur == b.tile(row + 1, col).value()) {
+                    return true;
+                }
+
+                // check left adjacent value
+                if(col > 0 && cur == b.tile(row, col - 1).value()) {
+                    return true;
+                }
+
+                // check top adjacent value
+                if(row > 0 && cur == b.tile(row - 1, col).value()) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
 
     @Override
-     /** Returns the model as a string, used for debugging. */
+    /** Returns the model as a string, used for debugging. */
     public String toString() {
         Formatter out = new Formatter();
         out.format("%n[%n");
