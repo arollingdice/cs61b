@@ -4,6 +4,7 @@ import java.util.Formatter;
 import java.util.Observable;
 
 
+
 /** The state of a game of 2048.
  *  @author Yucong Mo
  */
@@ -112,8 +113,10 @@ public class Model extends Observable {
 
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
-        // changed local variable to true.
+        // changed local variable to true
         int s = board.size();
+        side = Side.WEST;
+        board.setViewingPerspective(side);
         for (int c = 0; c < s; c ++) {
             // iterate from the top row
             int topPointer = s - 1;
@@ -129,9 +132,12 @@ public class Model extends Observable {
                // to the top
                if (top == null) {
                    board.move(c, topPointer, t);
+                   top = t;
+                   changed = true;
                }
                else if (top.value() == t.value() && top != t) {
                    board.move(c, topPointer, t);
+                   changed = true;
                    score += board.tile(c, topPointer).value();
                    topPointer --;
                    top = board.tile(c, topPointer);
@@ -140,15 +146,15 @@ public class Model extends Observable {
             }
         }
 
-
-//        for(int i = 3; i >= 0; i --) System.out.println(i);
-
         checkGameOver();
         if (changed) {
+            board.setViewingPerspective(Side.NORTH);
             setChanged();
         }
         return changed;
     }
+
+
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
