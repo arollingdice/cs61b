@@ -108,43 +108,23 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
-        boolean changed;
-        changed = false;
 
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true
-        int s = board.size();
-        side = Side.WEST;
-        board.setViewingPerspective(side);
-        for (int c = 0; c < s; c ++) {
-            // iterate from the top row
-            int topPointer = s - 1;
-            Tile top = board.tile(c, topPointer);
-            for (int r = s - 1; r >= 0; r --) {
-               // Pressing UP
 
-               // get current tile
-               Tile t = board.tile(c, r);
-               if (t == null) continue;
-
-               // if top is null, current tile can move up
-               // to the top
-               if (top == null) {
-                   board.move(c, topPointer, t);
-                   top = t;
-                   changed = true;
-               }
-               else if (top.value() == t.value() && top != t) {
-                   board.move(c, topPointer, t);
-                   changed = true;
-                   score += board.tile(c, topPointer).value();
-                   topPointer --;
-                   top = board.tile(c, topPointer);
-               }
-
-            }
+        switch (side) {
+            case NORTH:
+                board.setViewingPerspective(Side.NORTH);
+            case SOUTH:
+                board.setViewingPerspective(Side.SOUTH);
+            case EAST:
+                board.setViewingPerspective(Side.EAST);
+            case WEST:
+                board.setViewingPerspective(Side.WEST);
         }
+
+        boolean changed = helpTilt(side);
 
         checkGameOver();
         if (changed) {
@@ -154,7 +134,47 @@ public class Model extends Observable {
         return changed;
     }
 
+    public boolean helpTilt(Side side) {
 
+        boolean changed;
+        changed = false;
+        int s = board.size();
+
+        board.setViewingPerspective(side);
+        if(side != Side.NORTH) {
+            changed = true;
+        }
+        for (int c = 0; c < s; c ++) {
+            // iterate from the top row
+            int topPointer = s - 1;
+            Tile top = board.tile(c, topPointer);
+            for (int r = s - 1; r >= 0; r --) {
+                // get current tile
+                Tile t = board.tile(c, r);
+                if (t == null) continue;
+                // if top is null, current tile can move up to the top
+                if (top == null) {
+                    board.move(c, topPointer, t);
+                    top = t;
+                    changed = true;
+                }
+                else if (top.value() == t.value() && top != t) {
+                    board.move(c, topPointer, t);
+                    changed = true;
+                    score += board.tile(c, topPointer).value();
+                    topPointer --;
+                    top = board.tile(c, topPointer);
+                }
+                else if (top.value() != t.value()) {
+                    board.move(c, topPointer - 1, t);
+                    changed = true;
+                    topPointer --;
+                    top = board.tile(c, topPointer);
+                }
+            }
+        }
+        return changed;
+    }
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
