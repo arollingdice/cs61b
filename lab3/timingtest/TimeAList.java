@@ -35,7 +35,7 @@ public class TimeAList {
         ops.addLast(1000);
         nSize.addLast(1000);
 
-        for (int i = 1; i <= 15; i ++) {
+        for (int i = 1; i <= 6; i ++) {
             Stopwatch sw = new Stopwatch();
             int curSize = toTest.size();
             for (int j = 1; j <= curSize; j ++) {
