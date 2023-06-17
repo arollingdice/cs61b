@@ -132,7 +132,7 @@ public class ArrayDeque<Item> {
 
     /** Gets the ith item in the list (0 is the front). */
     public Item get(int i) {
-        if (i >= size ) {
+        if (i >= size || i < 0 ) {
             return null;
         }
 
@@ -151,7 +151,9 @@ public class ArrayDeque<Item> {
         Item x = getLast();
         nextLast = minusOne(nextLast);
         items[nextLast] = null;
-        size --;
+        if (size > 0) {
+            size --;
+        }
         return x;
     }
 
@@ -163,7 +165,9 @@ public class ArrayDeque<Item> {
         Item x = this.get(0);
         nextFirst = plusOne(nextFirst);
         items[nextFirst] = null;
-        size --;
+        if (size > 0) {
+            size --;
+        }
 
         return x;
 
