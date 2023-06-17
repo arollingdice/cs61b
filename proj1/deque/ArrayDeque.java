@@ -99,6 +99,7 @@ public class ArrayDeque<Item> {
         items[nextFirst] = x;
         // nextFirst is moved 1 unit to the left with minusOne
         nextFirst = minusOne(nextFirst);
+        size ++;
 
     }
 
@@ -120,6 +121,7 @@ public class ArrayDeque<Item> {
         items[nextLast] = x;
         // nextFirst is moved 1 unit to the right with plusOne
         nextLast = plusOne(nextLast);
+        size ++;
     }
 
     /** Returns the item from the back of the list. */
