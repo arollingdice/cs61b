@@ -128,7 +128,12 @@ public class ArrayDeque<Item> {
     }
     /** Gets the ith item in the list (0 is the front). */
     public Item get(int i) {
-        return items[i];
+        if (i >= size ) {
+            return null;
+        }
+
+        int index = (nextFirst + 1 + i) % items.length;
+        return items[index];
     }
 
     /** Returns the number of items in the list. */
@@ -144,4 +149,5 @@ public class ArrayDeque<Item> {
         size = size - 1;
         return x;
     }
+
 }
