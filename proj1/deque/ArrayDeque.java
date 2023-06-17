@@ -124,8 +124,10 @@ public class ArrayDeque<Item> {
 
     /** Returns the item from the back of the list. */
     public Item getLast() {
-        return items[size - 1];
+
+        return this.get(size - 1);
     }
+
     /** Gets the ith item in the list (0 is the front). */
     public Item get(int i) {
         if (i >= size ) {
@@ -145,9 +147,28 @@ public class ArrayDeque<Item> {
       * returns deleted item. */
     public Item removeLast() {
         Item x = getLast();
-        items[size - 1] = null;
-        size = size - 1;
+        nextLast = minusOne(nextLast);
+        items[nextLast] = null;
+        size --;
         return x;
+    }
+
+    /**
+     *  Removes the first item of the deque and returns it.
+     * @return the first item in the deque.
+     */
+    public Item removeFirst() {
+        Item x = this.get(0);
+        nextFirst = plusOne(nextFirst);
+        items[nextFirst] = null;
+        size --;
+
+        return x;
+
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
 }
