@@ -1,5 +1,6 @@
 package deque;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -187,5 +188,65 @@ public class LinkedListDequeTest {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
 
+    }
+    // Tests taken from exuanbo
+    // https://github.com/exuanbo/cs61b-sp21/blob/main/proj1/deque
+    @Test
+    public void iteratorTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+
+        for (int i = 0; i < 1000; i++) {
+            lld1.addLast(i);
+        }
+
+        int i = 0;
+        for (int item : lld1) {
+            assertEquals("Should have same value", i, item);
+            i += 1;
+        }
+    }
+
+    @Test
+    public void equalsTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+
+        lld1.addLast(0);
+        lld2.addLast(0);
+        assertEquals(lld1, lld2);
+
+        lld1.addLast(1);
+        assertNotEquals(lld1, lld2);
+
+        lld2.addLast(2);
+        assertNotEquals(lld1, lld2);
+    }
+
+    @Test
+    public void randomizedTest() {
+        LinkedListDeque<Integer> linkedListDeque = new LinkedListDeque<>();
+
+        int N = 1000000;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 6);
+            if (operationNumber == 0) {
+                int randVal = StdRandom.uniform(0, 100);
+                linkedListDeque.addFirst(randVal);
+            } else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 100);
+                linkedListDeque.addLast(randVal);
+            } else if (linkedListDeque.size() == 0) {
+                assertTrue(linkedListDeque.isEmpty());
+            } else if (operationNumber == 2) {
+                assertTrue(linkedListDeque.size() > 0);
+            } else if (operationNumber == 3) {
+                linkedListDeque.removeFirst();
+            } else if (operationNumber == 4) {
+                linkedListDeque.removeLast();
+            } else if (operationNumber == 5) {
+                int randIndex = StdRandom.uniform(0, linkedListDeque.size());
+                linkedListDeque.get(randIndex);
+            }
+        }
     }
 }

@@ -14,15 +14,11 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            return current.next != sentinel;
+            return current == sentinel;
         }
 
         @Override
         public T next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-
             T item = current.item;
             current = current.next;
             return item;
@@ -53,15 +49,6 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
-    }
-
-    public LinkedListDeque(T i) {
-        size = 1;
-        sentinel = new Node(null, null, null);
-        Node p = new Node(i, sentinel, sentinel);
-        sentinel.next = p;
-        sentinel.prev = p;
-
     }
 
     @Override
@@ -169,39 +156,25 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     // Inside your LinkedListDeque class
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
             return true;
         }
         if (!(o instanceof LinkedListDeque)) {
             return false;
         }
-
-        LinkedListDeque<?> other = (LinkedListDeque<?>) o;
-        if (this.size != other.size) {
+        LinkedListDeque<?> lld = (LinkedListDeque<?>) o;
+        if (lld.size() != size) {
             return false;
         }
-
-        Iterator<?> thisIterator = this.iterator();
-        Iterator<?> otherIterator = other.iterator();
-
-
-        while (thisIterator != sentinel) {
-            if (!thisIterator.next().equals(otherIterator.next())) {
+        for (int i = 0; i < size; i++) {
+            if (lld.get(i) != get(i)) {
                 return false;
             }
         }
-
         return true;
     }
-
-
-    public static void main(String[] args) {
-        LinkedListDeque<Integer> ld = new LinkedListDeque<>();
-        ld.addFirst(1);
-        ld.addFirst(2);
-        ld.addFirst(3);
-
-    }
-
 
 }
