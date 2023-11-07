@@ -53,9 +53,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     public int size() {
         return size;
     }
-    private int arrayLength() {
-        return items.length;
-    }
 
     @Override
     public T get(int index) {
@@ -152,7 +149,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         double usageFactor = size * 1.0 / items.length;
         while (usageFactor < 0.25 && usageFactor > 0 && size > 16 && size >= items.length) {
-            resize(0.5);
+            resize(0.1);
         }
 
         T target = this.get(size - 1);

@@ -69,7 +69,7 @@ public class LinkedListDequeTest {
         lld2.addLast("And");
         lld2.addLast("Dad!\n");
 
-        int item1 = lld1.getRucursive(0);
+        int item1 = lld1.getRecursive(0);
         String errorMsg1 = "Test list_1 : 1 2 3 4 5" + "\n";
         errorMsg1 += "  Bad item returned when getting item on index 0:\n";
         errorMsg1 += "list_1.get(0) returned " + item1 + "\n";
@@ -78,7 +78,7 @@ public class LinkedListDequeTest {
 
         assertEquals(errorMsg1, 1, item1);
 
-        String item2 = lld2.getRucursive(4);
+        String item2 = lld2.getRecursive(4);
         String errorMsg2 = "Test list_2 : 'I Love My Mom And Dad!\\n'" + "\n";
         errorMsg2 += "  Bad item returned when getting item on index 4:\n";
         errorMsg2 += "list_2.get(4) returned " + item2 + "\n";

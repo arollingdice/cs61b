@@ -130,7 +130,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     }
 
-    public T getRucursive(int index) {
+    public T getRecursive(int index) {
         if (index >= size) {
             return null;
         }
@@ -151,7 +151,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             if (i == size - 1) {
                 System.out.println(this.get(i));
             }
-            System.out.print(this.get(i)+ " ");
+            System.out.print(this.get(i) + " ");
         }
     }
 
@@ -169,18 +169,26 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     // Inside your LinkedListDeque class
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LinkedListDeque)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LinkedListDeque)) {
+            return false;
+        }
 
         LinkedListDeque<?> other = (LinkedListDeque<?>) o;
-        if (this.size != other.size) return false;
+        if (this.size != other.size) {
+            return false;
+        }
 
         Iterator<?> thisIterator = this.iterator();
         Iterator<?> otherIterator = other.iterator();
 
 
-        while (thisIterator!= sentinel) {
-            if (!thisIterator.next().equals(otherIterator.next())) return false;
+        while (thisIterator != sentinel) {
+            if (!thisIterator.next().equals(otherIterator.next())) {
+                return false;
+            }
         }
 
         return true;
