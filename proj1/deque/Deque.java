@@ -2,7 +2,9 @@ package deque;
 
 public interface Deque<T> {
 
-    boolean isEmpty();
+    default boolean isEmpty(){
+        return size() == 0;
+    }
     int size();
     T get(int index);
     void printDeque();
@@ -11,6 +13,5 @@ public interface Deque<T> {
     void addLast(T i);
     T removeFirst();
     T removeLast();
-    boolean equals(Object o);
 
 }

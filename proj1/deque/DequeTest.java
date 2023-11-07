@@ -17,9 +17,7 @@ public class DequeTest {
             ld1.addLast("fuck this shit!!!");
         }
 
-        for (int i = 0; i < 100; i ++) {
-            assertTrue("ArrayDeques and LinkedListDeques" +
-                    "with the same elmements should be equal", ad1.equals(ld1));
-        }
+        assertTrue("ArrayDeques and LinkedListDeques" +
+                "with the same elmements should be equal", ad1.equals(ld1));
     }
 }
