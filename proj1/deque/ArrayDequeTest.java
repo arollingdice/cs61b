@@ -1,5 +1,6 @@
 package deque;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -52,6 +53,21 @@ public class ArrayDequeTest {
 		assertTrue("ad1 should be empty after removal", ad1.isEmpty());
     }
 
+    @Test
+    public void getTest() {
+        // fill the array with 0;
+        ArrayDeque<Double> ad1 = new ArrayDeque<>(10);
+        int size = ad1.size();
+        for (int i = 0; i < size; i ++) {
+            ad1.addLast(0.0);
+        }
+        for (int i = 0; i < ad1.size(); i ++) {
+            double target = ad1.get(i);
+            assertEquals("should have the same value", 0.0, target, 0);
+
+        }
+
+    }
     @Test
     /* Tests get method from a list */
     public void getItemTest() {
@@ -147,11 +163,13 @@ public class ArrayDequeTest {
         }
 
         for (double i = 0; i < 500000; i++) {
-            assertEquals("Should have the same value", i, (double) ad1.removeFirst(), 0.0);
+            double target = (double) ad1.removeFirst();
+            assertEquals("Should have the same value", i, target, 0.0);
         }
 
         for (double i = 999999; i > 500000; i--) {
-            assertEquals("Should have the same value", i, (double) ad1.removeLast(), 0.0);
+            double target = (double) ad1.removeLast();
+            assertEquals("Should have the same value", i, target, 0.0);
         }
 
     }
@@ -159,13 +177,13 @@ public class ArrayDequeTest {
     @Test
     public void downSizingTest() throws Exception{
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 9; i++) {
             ad1.addLast(i);
         }
 
         try {
-            for (int i = 0; i < 9; i ++) {
-                int x = ad1.removeLast();
+            for (int i = 0; i < 4; i ++) {
+                 ad1.removeLast();
             }
         } catch (Exception e) {
             System.out.println("size:" + ad1.size());
@@ -187,5 +205,24 @@ public class ArrayDequeTest {
                             Math.round(usageFactor * 100.0) / 100.0,
                     (Math.round(usageFactor * 100.0) / 100.0 >= 0.25));
         }
+    }
+
+    @Test
+    public void equalsTest() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 30000; i++) {
+            ad1.addLast(i);
+        }
+        ArrayDeque<Integer> ad2 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 30000; i++) {
+            ad2.addLast(i);
+        }
+
+        assertTrue("ad1 and ad2 should be equal", ad1.equals(ad2));
+        for (int i = 0; i < 9; i ++) {
+            int x = ad1.removeLast();
+        }
+        assertTrue("after removing some elements " +
+                "from ad1, ad1 and ad2 should not be equal", !ad1.equals(ad2));
     }
 }

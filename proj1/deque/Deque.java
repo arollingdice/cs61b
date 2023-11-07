@@ -11,5 +11,6 @@ public interface Deque<T> {
     void addLast(T i);
     T removeFirst();
     T removeLast();
+    boolean equals(Object o);
 
 }

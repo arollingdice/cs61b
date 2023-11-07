@@ -52,6 +52,55 @@ public class LinkedListDequeTest {
     }
 
     @Test
+    public void recursiveGetItemTest() {
+
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.addFirst(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        lld1.addLast(4);
+        lld1.addLast(5);
+
+        LinkedListDeque<String> lld2 = new LinkedListDeque<>();
+        lld2.addFirst("I ");
+        lld2.addLast("Love");
+        lld2.addLast("My");
+        lld2.addLast("Mom");
+        lld2.addLast("And");
+        lld2.addLast("Dad!\n");
+
+        int item1 = lld1.recursiveGet(0);
+        String errorMsg1 = "Test list_1 : 1 2 3 4 5" + "\n";
+        errorMsg1 += "  Bad item returned when getting item on index 0:\n";
+        errorMsg1 += "list_1.get(0) returned " + item1 + "\n";
+        errorMsg1 += "expect 1\n";
+
+
+        assertEquals(errorMsg1, 1, item1);
+
+        String item2 = lld2.recursiveGet(4);
+        String errorMsg2 = "Test list_2 : 'I Love My Mom And Dad!\\n'" + "\n";
+        errorMsg2 += "  Bad item returned when getting item on index 4:\n";
+        errorMsg2 += "list_2.get(4) returned " + item2 + "\n";
+        errorMsg2 += "expect: \"And\"\n";
+        assertEquals(errorMsg2, "And", item2);
+    }
+    @Test
+    public void getTest() {
+        // fill the array with 0;
+        LinkedListDeque<Double> ld1 = new LinkedListDeque<>(10);
+        int size = ld1.size();
+        for (int i = 0; i < size; i ++) {
+            ld1.addLast(0.0);
+        }
+        for (int i = 0; i < ld1.size(); i ++) {
+            double target = ld1.get(i);
+            assertEquals("should have the same value", 0.0, target, 0);
+
+        }
+
+    }
+    @Test
     /* Tests get method from a list */
     public void getItemTest() {
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
