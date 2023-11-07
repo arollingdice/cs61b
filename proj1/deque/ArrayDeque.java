@@ -44,13 +44,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         nextLast = 0;
     }
 
-    /** Creates a list of size x */
-    public ArrayDeque(int x) {
-        size = 0;
-        items = (T[]) new Object[x];
-        nextFirst = items.length - 1;
-        nextLast = 0;
-    }
     @Override
     public boolean isEmpty() {
         return size == 0;
@@ -60,7 +53,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     public int size() {
         return size;
     }
-    public int arrayLength() {
+    private int arrayLength() {
         return items.length;
     }
 

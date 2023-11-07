@@ -1,6 +1,5 @@
 package deque;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -18,22 +17,22 @@ public class ArrayDequeTest {
 
         ArrayDeque<String> ad1 = new ArrayDeque<String>();
 
-		assertTrue("A newly initialized LLDeque should be empty", ad1.isEmpty());
-		ad1.addFirst("front");
+        assertTrue("A newly initialized LLDeque should be empty", ad1.isEmpty());
+        ad1.addFirst("front");
 
-		// The && operator is the same as "and" in Python.
-		// It's a binary operator that returns true if both arguments true, and false otherwise.
+        // The && operator is the same as "and" in Python.
+        // It's a binary operator that returns true if both arguments true, and false otherwise.
         assertEquals(1, ad1.size());
         assertFalse("ad1 should now contain 1 item", ad1.isEmpty());
 
-		ad1.addLast("middle");
-		assertEquals(2, ad1.size());
+        ad1.addLast("middle");
+        assertEquals(2, ad1.size());
 
-		ad1.addLast("back");
-		assertEquals(3, ad1.size());
+        ad1.addLast("back");
+        assertEquals(3, ad1.size());
 
-		System.out.println("Printing out deque: ");
-		ad1.printDeque();
+        System.out.println("Printing out deque: ");
+        ad1.printDeque();
     }
 
     @Test
@@ -41,33 +40,18 @@ public class ArrayDequeTest {
     public void addRemoveTest() {
 
         ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-		// should be empty
-		assertTrue("ad1 should be empty upon initialization", ad1.isEmpty());
+        // should be empty
+        assertTrue("ad1 should be empty upon initialization", ad1.isEmpty());
 
-		ad1.addFirst(10);
-		// should not be empty
-		assertFalse("ad1 should contain 1 item", ad1.isEmpty());
+        ad1.addFirst(10);
+        // should not be empty
+        assertFalse("ad1 should contain 1 item", ad1.isEmpty());
 
-		ad1.removeFirst();
-		// should be empty
-		assertTrue("ad1 should be empty after removal", ad1.isEmpty());
+        ad1.removeFirst();
+        // should be empty
+        assertTrue("ad1 should be empty after removal", ad1.isEmpty());
     }
 
-    @Test
-    public void getTest() {
-        // fill the array with 0;
-        ArrayDeque<Double> ad1 = new ArrayDeque<>(10);
-        int size = ad1.size();
-        for (int i = 0; i < size; i ++) {
-            ad1.addLast(0.0);
-        }
-        for (int i = 0; i < ad1.size(); i ++) {
-            double target = ad1.get(i);
-            assertEquals("should have the same value", 0.0, target, 0);
-
-        }
-
-    }
     @Test
     /* Tests get method from a list */
     public void getItemTest() {
@@ -183,28 +167,12 @@ public class ArrayDequeTest {
 
         try {
             for (int i = 0; i < 4; i ++) {
-                 ad1.removeLast();
+                ad1.removeLast();
             }
         } catch (Exception e) {
             System.out.println("size:" + ad1.size());
-            System.out.println("arrayLength:" + ad1.arrayLength());
         }
-        double usageFactor = (double)ad1.size() / ad1.arrayLength();
-        System.out.println("size:" + ad1.size());
-        System.out.println("arrayLength:" + ad1.arrayLength());
-        System.out.println("usageFactor:" + usageFactor);
-        if (ad1.arrayLength() <= 16) {
-            assertTrue("usage factor for small array " +
-                            "can be arbitrarily low, " +
-                            Math.round(usageFactor * 100.0) / 100.0,
-                    (Math.round(usageFactor * 100.0) / 100.0 > 0));
-        }
-        else {
-            assertTrue("usage factor for big array " +
-                            "should be greater than 25%, but got: " +
-                            Math.round(usageFactor * 100.0) / 100.0,
-                    (Math.round(usageFactor * 100.0) / 100.0 >= 0.25));
-        }
+
     }
 
     @Test

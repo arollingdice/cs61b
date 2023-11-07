@@ -27,12 +27,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         sentinel.prev = sentinel;
     }
 
-    public LinkedListDeque(int x) {
-        size = 0;
-        sentinel = new Node(null, null, null);
-        sentinel.next = sentinel;
-        sentinel.prev = sentinel;
-    }
     public LinkedListDeque(T i) {
         size = 1;
         sentinel = new Node(null, null, null);
@@ -108,7 +102,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     }
 
-    public T recursiveGet(int index) {
+    public T getRucursive(int index) {
         if (index >= size) {
             return null;
         }
