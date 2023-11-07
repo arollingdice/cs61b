@@ -2,6 +2,8 @@ package deque;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
@@ -192,5 +194,63 @@ public class ArrayDequeTest {
         }
         assertTrue("after removing some elements " +
                 "from ad1, ad1 and ad2 should not be equal", !ad1.equals(ad2));
+    }
+
+
+    @Test
+    /* Add large number of elements to deque; check if order is correct. */
+    public void bigLLDequeTest() {
+
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        for (int i = 0; i < 16; i++) {
+            lld1.addLast(i);
+        }
+
+        assertEquals(16, lld1.size());
+
+        for (double i = 0; i < 8; i++) {
+            assertEquals("Should have the same value", i, (double) lld1.removeFirst(), 0.0);
+        }
+
+        for (double i = 15; i > 8; i--) {
+            assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
+        }
+
+    }
+
+
+    @Test
+    /* Test Iterator */ public void IteratorTest() {
+
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        int[] data = {5, 23, 42};
+        for (int i = 0; i < data.length; i++) {
+            lld1.addLast(data[i]);
+        }
+
+        Iterator<Integer> aseer = lld1.iterator();
+        int j = 0;
+        while (aseer.hasNext()) {
+            int i = aseer.next();
+            assertEquals("should have the same value", i, data[j]);
+            j += 1;
+        }
+
+        for (int i : lld1) {
+            System.out.println(i);
+        }
+    }
+
+    @Test
+    public void checkResizeTest() {
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        for (int N = 64; N <= 64; N = N * N) {
+            for (int i = 1; i <= N; i++) {
+                lld1.addLast(i);
+            }
+            for (int i = N; i >= 1; i--) {
+                lld1.removeLast();
+            }
+        }
     }
 }
