@@ -12,12 +12,12 @@ public class DequeTest {
         Deque<String> ad1 = new ArrayDeque<>();
         Deque<String> ld1 = new LinkedListDeque<>();
 
-        for (int i = 0; i < 100; i ++) {
+        for (int i = 0; i < 100; i++) {
             ad1.addLast("fuck this shit!!!");
             ld1.addLast("fuck this shit!!!");
         }
 
-        assertTrue("ArrayDeques and LinkedListDeques" +
-                "with the same elmements should be equal", ad1.equals(ld1));
+        assertTrue("ArrayDeques and LinkedListDeques"
+                + "with the same elmements should be equal", ad1.equals(ld1));
     }
 }
