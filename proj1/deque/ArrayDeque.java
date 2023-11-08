@@ -44,6 +44,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         nextLast = 0;
     }
 
+    public int al() {
+        return items.length;
+    }
+
     @Override
     public int size() {
         return size;
@@ -121,15 +125,17 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         size++;
     }
 
+    private void checkResize() {
+        if ((size < items.length /4 + 1) && (items.length > 16)) {
+            resize(0.5);
+        }
+    }
     @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
         }
-        double usageFactor = size * 1.0 / items.length;
-        while (usageFactor < 0.25 && usageFactor > 0 && items.length > 16 && size >= items.length) {
-            resize(0.5);
-        }
+        checkResize();
         T target = this.get(0);
         // move nextFirst to the right.
         nextFirst = movePointer(nextFirst, 1);
@@ -144,10 +150,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (isEmpty()) {
             return null;
         }
-        double usageFactor = size * 1.0 / items.length;
-        while (usageFactor < 0.25 && usageFactor > 0 && items.length > 16) {
-            resize(0.5);
-        }
+
+        checkResize();
 
         T target = this.get(size - 1);
         // move nextFirst to the right.

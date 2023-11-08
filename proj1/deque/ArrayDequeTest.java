@@ -244,13 +244,14 @@ public class ArrayDequeTest {
     @Test
     public void checkResizeTest() {
         ArrayDeque<Integer> lld1 = new ArrayDeque<>();
-        for (int N = 64; N <= 64; N = N * N) {
+        for (int N = 8; N <= 64; N = N * N) {
             for (int i = 1; i <= N; i++) {
                 lld1.addLast(i);
             }
             for (int i = N; i >= 1; i--) {
                 lld1.removeLast();
             }
+            System.out.println("memory usage:" +lld1.al());
         }
     }
 }
