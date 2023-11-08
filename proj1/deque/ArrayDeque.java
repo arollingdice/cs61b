@@ -44,10 +44,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         nextLast = 0;
     }
 
-    public int al() {
-        return items.length;
-    }
-
     @Override
     public int size() {
         return size;
@@ -151,7 +147,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
 
-        if (size * 1.0 / items.length < 0.25 && items.length > 16) resize(0.5);
+        checkResize();
 
         T target = this.get(size - 1);
         // move nextFirst to the right.
@@ -186,10 +182,5 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return true;
 
     }
-
-    public static void main(String[] args) {
-        System.out.println(10/4);
-    }
-
 
 }

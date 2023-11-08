@@ -160,22 +160,6 @@ public class ArrayDequeTest {
 
     }
 
-    @Test
-    public void downSizingTest() throws Exception{
-        ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
-        for (int i = 0; i < 9; i++) {
-            ad1.addLast(i);
-        }
-
-        try {
-            for (int i = 0; i < 4; i ++) {
-                ad1.removeLast();
-            }
-        } catch (Exception e) {
-            System.out.println("size:" + ad1.size());
-        }
-
-    }
 
     @Test
     public void equalsTest() {
@@ -189,11 +173,11 @@ public class ArrayDequeTest {
         }
 
         assertTrue("ad1 and ad2 should be equal", ad1.equals(ad2));
-        for (int i = 0; i < 9; i ++) {
+        for (int i = 0; i < 9; i++) {
             int x = ad1.removeLast();
         }
-        assertTrue("after removing some elements " +
-                "from ad1, ad1 and ad2 should not be equal", !ad1.equals(ad2));
+        assertTrue("after removing some elements "
+                + "from ad1, ad1 and ad2 should not be equal", !ad1.equals(ad2));
     }
 
 
@@ -220,7 +204,7 @@ public class ArrayDequeTest {
 
 
     @Test
-    /* Test Iterator */ public void IteratorTest() {
+    /* Test Iterator */ public void iteratorTest() {
 
         ArrayDeque<Integer> lld1 = new ArrayDeque<>();
         int[] data = {5, 23, 42};
@@ -251,7 +235,6 @@ public class ArrayDequeTest {
             for (int i = N; i >= 1; i--) {
                 lld1.removeLast();
             }
-            System.out.println("memory usage:" +lld1.al());
         }
     }
 }
