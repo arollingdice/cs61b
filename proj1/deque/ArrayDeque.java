@@ -151,7 +151,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
 
-        checkResize();
+        if (size * 1.0 / items.length < 0.25 && items.length > 16) resize(0.5);
 
         T target = this.get(size - 1);
         // move nextFirst to the right.
