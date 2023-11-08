@@ -80,10 +80,12 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         T[] newArray = (T[]) new Object[capacity];
 
         if (x >= 1) {
+            System.out.println("expanding:" + items.length + "->" + capacity);
             for (int i = 0; i < items.length; i++) {
                 newArray[i] = this.get(i);
             }
         } else {
+            System.out.println("shrinking:" + items.length + "->" + capacity);
             for (int i = 0; i < capacity; i++) {
                 newArray[i] = this.get(i);
             }
@@ -125,7 +127,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         double usageFactor = size * 1.0 / items.length;
-        while (usageFactor < 0.25 && usageFactor > 0 && size > 16 && size >= items.length) {
+        while (usageFactor < 0.25 && usageFactor > 0 && items.length > 16 && size >= items.length) {
             resize(0.5);
         }
         T target = this.get(0);
@@ -143,8 +145,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         double usageFactor = size * 1.0 / items.length;
-        while (usageFactor < 0.25 && usageFactor > 0 && size > 16 && size >= items.length) {
-            resize(0.1);
+        while (usageFactor < 0.25 && usageFactor > 0 && items.length > 16) {
+            resize(0.5);
         }
 
         T target = this.get(size - 1);
