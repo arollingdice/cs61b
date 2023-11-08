@@ -126,7 +126,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     private void checkResize() {
-        if ((size < items.length /4 + 1) && (items.length > 16)) {
+        if ((size * 1.0 / items.length < 25) && (items.length > 16)) {
             resize(0.5);
         }
     }
@@ -185,6 +185,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
         return true;
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(10/4);
     }
 
 
